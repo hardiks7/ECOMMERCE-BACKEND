@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const categorySchema = new mongoose.Schema({
+const brandSchema = new mongoose.Schema({
      lable: { type: String, require: true, unique: true },
      value: { type: String, require: true, unique: true }
 })
 
-const virtual = categorySchema.virtual('id');
+const virtual = brandSchema.virtual('id');
 virtual.get(function() {
     return this._id;
 })
-categorySchema.set('toJSON', {
+brandSchema.set('toJSON', {
     virtuals: true,
     versionKey:false,
     transform: function (doc,ret) { delete ret._id}
 })
 
-exports.Category = mongoose.model('Category', categorySchema)
+exports.Brand = mongoose.model('Brand', brandSchema)
