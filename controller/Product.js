@@ -26,6 +26,7 @@ exports.feachAllProducts = async (req, res) => {
         query = query.find({ brand: req.query.brand });
         totalProductsQuery = totalProductsQuery.find({ brand: req.query.brand })
     }
+    // TODO : How to get sort on discounted Price not on Actual Price
     if(req.query._sort && req.query._order){
         query = query.sort({ [req.query._sort]: req.query._order })
     }
@@ -50,6 +51,26 @@ exports.feachAllProducts = async (req, res) => {
     }
 };
 
+exports.feachProductById = async (req, res) => {
+    const {id} = req.params;
+    
+    try {
+        const product = await Product.findById(id);
+        res.status(200).json(product);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+};
 
+exports.updateProduct = async (req, res) => {
+    const {id} = req.params;
+    
+    try {
+        const product = await Product.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(200).json(product);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+};
 
 
