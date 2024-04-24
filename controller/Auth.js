@@ -12,19 +12,38 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     try {
-       const user = await User.findOne(
-          {email:req.body.email}, 
-        ).exac();
-
+       const user = await User.findOne( 
+        {email:req.body.email},
+    ).exec();
+        //  temporary
             console.log({user});
             if (!user) {
-                res.stats(401).json({ message: 'no such user email'})
+                res.status(401).json({ message: 'no such user email'});
             } else if(user.password === req.body.password){
-            res.status(200).json({id:user.id, email:user.email, name:user.name});
-            } else {
-            res.status(400).json({ message: 'invalid credentials'});
+               res.status(200).json({id:user.id, email:user.email, name:user.name});
+            } else{
+                res.status(401).json({ message: 'invalid credentials'});
             }
-           } catch (err) {
-           res.status(401).json(err);
+    } catch (err) {
+           res.status(400).json(err);
     }
 }
+
+
+
+// try {
+//     const user = await User.findOne(
+//        {email:req.body.email}, 
+//      ).exac();
+//      //  temporary
+//          console.log({user});
+//          if (!user) {
+//              res.stats(401).json({ message: 'no such user email'})
+//          } else if(user.password === req.body.password){
+//          res.status(200).json({id:user.id, email:user.email, name:user.name, addresses:user.addresses});
+//          } else {
+//          res.status(401).json({ message: 'invalid credentials'});
+//          }
+//         } catch (err) {
+//         res.status(400).json(err);
+//  }
