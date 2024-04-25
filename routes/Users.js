@@ -1,5 +1,6 @@
 const express = require('express');
-const { feachUserById, updateUser } = require('../controller/User');
+const { feachUserById,
+       updateUser } = require('../controller/User');
 
 
 const router = express.Router();

@@ -2,7 +2,7 @@ const  {User}  = require("../model/User");
 
 exports.feachUserById = async (req, res) => {
     const {id} = req.params;
-
+    console.log(id);
     try {
         const user = await User.findById(id, 'name email id').exec();
         res.status(200).json(user);
