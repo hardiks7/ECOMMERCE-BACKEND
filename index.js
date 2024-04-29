@@ -35,8 +35,6 @@ server.get('/',(req,res)=>{
     res.json({status:'success'})
 })
 
-   
-
 server.listen(8080, ()=> {
     console.log('Server Started');
 
